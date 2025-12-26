@@ -127,8 +127,10 @@
     <ClCompile Include="gameFunctions.cpp" />
     <ClCompile Include="level1.cpp" />
     <ClCompile Include="moveEnemies.cpp" />
+    <ClCompile Include="chests1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chests1.h" />
     <ClInclude Include="gameFunctions.h" />
     <ClInclude Include="level1.h" />
     <ClInclude Include="moveEnemies.h" />
