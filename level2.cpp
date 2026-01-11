@@ -2,30 +2,28 @@
 #include <fstream>
 #include <string>
 #include "gameFunctions.h"
-#include "level1.h"
+#include "level2.h"
 #include "moveEnemies.h"
-#include "chests1.h"
+#include "chest2.h"
 #include "startGame.h"
 #include "StuffLikeThat.h"
 #include "spavner.h"
 #include "NPC1.h"
 
 
-int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& magicItem2, int& qwest11, int& qwest12, int& qwest13, int& qwest14, int& killCount)
+int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& magicItem2, int& qwest11, int& qwest12, int& qwest13, int& qwest14, int& killCount)
 {
 
     // Создание всех переменных
     std::string line; // для чтения файла
     int playerX = -1, playerY = -1; // Позиция игрока
     bool flagMove = false; // Проверка, что игрок хочет двигаться, а не что-то другое
-    bool flagWin = false;
-    bool flagSave = false;
     int temp = { 0 }; // Счётчик килов
-    int swordInChest1 = 1, keysInChest1 = 1, magicItemInChest2 = 1, keysInChest2 = 2, keysInChest3 = 1, armorInChest3 = 1, keysInChest4 = 4, armorInChest4 = 1; // Заполнение сундуков
+    int magicItemInChest22 = 1, keysInChest21 = 6; // Заполнение сундуков
     int bomb = 0;
-    
 
-    char** arrMap = startGame("lvl1.txt", playerX, playerY);
+
+    char** arrMap = startGame("lvl2.txt", playerX, playerY);
 
 
     // Создание массива для врагов (в куче)
@@ -56,7 +54,7 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
 
         clearMap(arrMap);
 
-        if(i > 21) spavner(arrMap, enemyCount);
+        if (i > 21) spavner(arrMap, enemyCount);
 
 
         enemyCount = enemies(arrMap);
@@ -138,7 +136,10 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
 
         case('R'):
         case('r'):
-            chestsInLvl1(playerX, playerY, sword, keys, swordInChest1, keysInChest1, magicItem, magicItemInChest2, keysInChest2, armor, armorInChest3, keysInChest3, armorInChest4, keysInChest4);
+            if (playerX == 21 && playerY == 19)
+                chest22(magicItem2, magicItemInChest22);
+            else if ((playerX == 27 && playerY == 54) || (playerX == 28 && playerY == 53))
+                chest21(keys, keysInChest21);
             continue;
 
         case('T'):
@@ -146,36 +147,19 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             persons1(playerX, playerY, qwest11, qwest12, qwest13, qwest14, armor, keys, killCount, magicItem, bomb);
             continue;
 
-        case('K'):
-        case('k'):
-            flagSave = true;
-            break;
+        case('X'):
+        case('x'):
+            return 2;
 
         default:
             std::cout << "Unknown command. Try again.\n";
             continue;
         }
 
-        if (flagSave)
-        {
-            std::ofstream file("lvl1.txt");
-            for (int i = 0; i < 30; ++i)
-            {
-                for (int j = 0; j < 56; ++j)
-                {
-                    file << arrMap[i][j];
-                }
-                file << std::endl;
-            }
-            file.close();
-            break;
-        }
-        
         // Проверяем, можно ли сделать ход и хочет ли игрок ходить
         if (movePlayer(arrMap, playerX, playerY, newX, newY, keys, flagMove, bomb))
         {
-            flagWin = true;
-            break;
+            return 1;
         }
 
         i > 10 ? moveEnemies(arrMap, playerX, playerY, enemyPositions) : 1;
@@ -196,7 +180,7 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
         std::cout << std::endl;
         std::cout << "Player position: X=" << playerX << ", Y=" << playerY << std::endl;
     }
-    
+
 
     // Освобождение памяти карты
     for (int i = 0; i < 30; ++i)
@@ -212,9 +196,5 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
     }
     delete[] enemyPositions;
 
-    if (flagWin)
-        return 2;
-    if (flagSave)
-        return 1;
-    return 0;
+    return -1;
 }

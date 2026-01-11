@@ -10,6 +10,7 @@ bool isDeapth(int** enemyPositions, int playerX, int playerY, int enemyCount, in
 {
     for (int i = 0; i < enemyCount; ++i)
     {
+        if (i > 50) continue;
         int enemyX = enemyPositions[i][0];
         int enemyY = enemyPositions[i][1];
 
@@ -40,8 +41,11 @@ int moveEnemies(char** arrMap, int playerX, int playerY, int** enemyPositions)
         {
             if (arrMap[i][j] == 'D')
             {
-                enemyPositions[enemyCount][0] = i; // X координата
-                enemyPositions[enemyCount][1] = j; // Y координата
+                if (enemyCount < 50)
+                {
+                    enemyPositions[enemyCount][0] = i; // X координата
+                    enemyPositions[enemyCount][1] = j; // Y координата
+                }
                 enemyCount++;
             }
         }
@@ -50,72 +54,106 @@ int moveEnemies(char** arrMap, int playerX, int playerY, int** enemyPositions)
     // Двигаем каждого врага
     for (int e = 0; e < enemyCount; ++e)
     {
+        if (e > 50) continue; 
+
         int enemyX = enemyPositions[e][0];
         int enemyY = enemyPositions[e][1];
 
-        // Определяем направление к игроку
-        int dx = 0, dy = 0;
-
-        // Сначала определяем вертикальное направление
-        if (enemyX > playerX)
-        {
-            dx = -1; // Игрок выше - идём вверх
-        }
-        else if (enemyX < playerX)
-        {
-            dx = 1; // Игрок ниже - идём вниз
-        }
-        // Если на одной вертикали, определяем горизонтальное
-        else if (enemyY > playerY)
-        {
-            dy = -1; // Игрок левее - идём влево
-        }
-        else if (enemyY < playerY)
-        {
-            dy = 1; // Игрок правее - идём вправо
-        }
-
-        // Пытаемся двигаться
         bool moved = false;
 
-        // Пробуем вертикальное движение (если нужно)
-        if (dx != 0)
+        // Определяем направление к игроку
+        int targetX = 0, targetY = 0;
+
+        if (enemyX > playerX) targetX = -1; // Игрок выше - идём вверх
+        else if (enemyX < playerX) targetX = 1; // Игрок ниже - идём вниз
+
+        if (enemyY > playerY) targetY = -1; // Игрок левее - идём влево
+        else if (enemyY < playerY) targetY = 1; // Игрок правее - идём вправо
+
+        // Пробуем 4 направления в порядке приоритета:
+        // 1. Вертикальное направление к игроку (если нужно)
+        // 2. Горизонтальное направление к игроку (если нужно)
+        // 3. Альтернативное вертикальное (если вертикальное заблокировано)
+        // 4. Альтернативное горизонтальное (если горизонтальное заблокировано)
+
+        // 1. Пробуем вертикальное направление к игроку
+        if (targetX != 0)
         {
-            int newX = enemyX + dx;
-            if (newX >= 0 && newX < 30)
+            int newX = enemyX + targetX;
+            if (newX >= 0 && newX < 30 && arrMap[newX][enemyY] == ' ')
             {
-                if (arrMap[newX][enemyY] == ' ')
-                {
-                    // Можем двигаться по вертикали
-                    arrMap[enemyX][enemyY] = ' ';
-                    arrMap[newX][enemyY] = 'D';
-                    moved = true;
-                    // Обновляем позицию
-                    enemyPositions[e][0] = newX;
-                }
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[newX][enemyY] = 'D';
+                enemyPositions[e][0] = newX;
+                moved = true;
             }
         }
 
-        // Если не двигались вертикально, пробуем горизонтально
-        if (!moved && dy != 0)
+        // 2. Если не вышло по вертикали, пробуем горизонтальное направление к игроку
+        if (!moved && targetY != 0)
         {
-            int newY = enemyY + dy;
-            if (newY >= 0 && newY < 56)
+            int newY = enemyY + targetY;
+            if (newY >= 0 && newY < 56 && arrMap[enemyX][newY] == ' ')
             {
-                if (arrMap[enemyX][newY] == ' ')
-                {
-                    // Можем двигаться по горизонтали
-                    arrMap[enemyX][enemyY] = ' ';
-                    arrMap[enemyX][newY] = 'D';
-                    moved = true;
-                    // Обновляем позицию
-                    enemyPositions[e][1] = newY;
-                }
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[enemyX][newY] = 'D';
+                enemyPositions[e][1] = newY;
+                moved = true;
+            }
+        }
+
+        // 3. Если не вышло ни то, ни другое, но нужно двигаться по вертикали
+        // (игрок выше или ниже), пробуем обходной путь по горизонтали
+        if (!moved && targetX != 0 && targetY == 0)
+        {
+            // Игрок прямо сверху или снизу, но путь вертикально заблокирован
+            // Пробуем пойти влево или вправо (в любую свободную сторону)
+            if (enemyY + 1 < 56 && arrMap[enemyX][enemyY + 1] == ' ')
+            {
+                // Вправо
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[enemyX][enemyY + 1] = 'D';
+                enemyPositions[e][1] = enemyY + 1;
+                moved = true;
+            }
+            else if (enemyY - 1 >= 0 && arrMap[enemyX][enemyY - 1] == ' ')
+            {
+                // Влево
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[enemyX][enemyY - 1] = 'D';
+                enemyPositions[e][1] = enemyY - 1;
+                moved = true;
+            }
+        }
+
+        // 4. Если не вышло, но нужно двигаться по горизонтали
+        // (игрок слева или справа), пробуем обходной путь по вертикали
+        if (!moved && targetY != 0 && targetX == 0)
+        {
+            // Игрок прямо слева или справа, но путь горизонтально заблокирован
+            // Пробуем пойти вверх или вниз (в любую свободную сторону)
+            if (enemyX + 1 < 30 && arrMap[enemyX + 1][enemyY] == ' ')
+            {
+                // Вниз
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[enemyX + 1][enemyY] = 'D';
+                enemyPositions[e][0] = enemyX + 1;
+                moved = true;
+            }
+            else if (enemyX - 1 >= 0 && arrMap[enemyX - 1][enemyY] == ' ')
+            {
+                // Вверх
+                arrMap[enemyX][enemyY] = ' ';
+                arrMap[enemyX - 1][enemyY] = 'D';
+                enemyPositions[e][0] = enemyX - 1;
+                moved = true;
             }
         }
     }
     return enemyCount;
 }
+
+// Функция удара
 void bit(char** arrMap, int playerX, int playerY, int sword, int bow) // Удары
 {
     std::string bit = "";

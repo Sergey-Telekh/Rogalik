@@ -123,17 +123,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="chest2.cpp" />
+    <ClCompile Include="level2.cpp" />
     <ClCompile Include="Roguelike.cpp" />
     <ClCompile Include="gameFunctions.cpp" />
     <ClCompile Include="level1.cpp" />
     <ClCompile Include="moveEnemies.cpp" />
     <ClCompile Include="chests1.cpp" />
+    <ClCompile Include="NPC1.cpp" />
+    <ClCompile Include="spawner.cpp" />
+    <ClCompile Include="StuffLikeThat.cpp" />
+    <ClCompile Include="startGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chest2.h" />
     <ClInclude Include="chests1.h" />
     <ClInclude Include="gameFunctions.h" />
+    <ClInclude Include="level2.h" />
+    <ClInclude Include="NPC1.h" />
+    <ClInclude Include="spavner.h" />
+    <ClInclude Include="startGame.h" />
     <ClInclude Include="level1.h" />
     <ClInclude Include="moveEnemies.h" />
+    <ClInclude Include="StuffLikeThat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
