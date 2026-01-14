@@ -18,9 +18,10 @@ bool isDeapth(int** enemyPositions, int playerX, int playerY, int enemyCount, in
         if ((abs(enemyX - playerX) == 1 && enemyY == playerY) ||  // сверху или снизу
             (abs(enemyY - playerY) == 1 && enemyX == playerX))    // слева или справа
         {
-            if (armor == 1)
+            if (armor >= 1)
             {
                 armor--;
+                std::cout << "Зомби настиг вас, но не всё так плохо, у вас была броня, жалко она не уцелела(\n";
                 return false;
             }
             return true;

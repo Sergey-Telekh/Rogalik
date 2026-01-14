@@ -2,26 +2,27 @@
 #include <fstream>
 #include <string>
 #include "gameFunctions.h"
-#include "level2.h"
 #include "moveEnemies.h"
 #include "chest2.h"
 #include "startGame.h"
 #include "StuffLikeThat.h"
 #include "spavner.h"
-#include "NPC1.h"
+#include "NPC2.h"
 
 
-int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& magicItem2, int& qwest11, int& qwest12, int& qwest13, int& qwest14, int& killCount)
+int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qwest21, int& qwest22, int& killCount)
 {
 
     // Создание всех переменных
     std::string line; // для чтения файла
     int playerX = -1, playerY = -1; // Позиция игрока
     bool flagMove = false; // Проверка, что игрок хочет двигаться, а не что-то другое
+    bool flagWin = false;
+    bool flagSave = false;
     int temp = { 0 }; // Счётчик килов
-    int magicItemInChest22 = 1, keysInChest21 = 6; // Заполнение сундуков
+    int keysInChest21 = 6; // Заполнение сундуков
     int bomb = 0;
-
+    int killCountQwest = 0;
 
     char** arrMap = startGame("lvl2.txt", playerX, playerY);
 
@@ -72,7 +73,7 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
 
         // Получение хода от игрока
         char move = ' ';
-        std::cout << "Enter move (W/A/S/D/E/Q/R/T, or 'X' to exit): ";
+        std::cout << "Enter move (W/A/S/D/I/Q/R/T/S/X, or 'M' to save): ";
         std::cin >> move;
         std::cout << std::endl;
 
@@ -119,8 +120,8 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             flagMove = true;
             break;
 
-        case('E'):
-        case('e'):
+        case('I'):
+        case('i'):
             inventory(sword, bow, armor, keys);
             continue; // Пропускаем перерисовку карты
 
@@ -129,37 +130,57 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             bit(arrMap, playerX, playerY, sword, bow);
             break;
 
-        case('Z'):
-        case('z'):
+        case('R'):
+        case('r'):
             printRules();
             continue;
 
-        case('R'):
-        case('r'):
+        case('C'):
+        case('c'):
             if (playerX == 21 && playerY == 19)
-                chest22(magicItem2, magicItemInChest22);
+                chest22(bomb);
             else if ((playerX == 27 && playerY == 54) || (playerX == 28 && playerY == 53))
                 chest21(keys, keysInChest21);
             continue;
 
         case('T'):
         case('t'):
-            persons1(playerX, playerY, qwest11, qwest12, qwest13, qwest14, armor, keys, killCount, magicItem, bomb);
+            if ((playerX == 12 && playerY == 6) || (playerX == 13 && playerY == 5))
+                person21(qwest21, killCount, magicItem2, keys, killCountQwest);
+            else if ((playerX == 26 && playerY == 2) || (playerX == 25 && playerY == 1) || (playerX == 27 && playerY == 1))
+                person22(qwest22, magicItem2, bow);
             continue;
 
-        case('X'):
-        case('x'):
-            return 2;
+        case('M'):
+        case('m'):
+            flagSave = true;
+            break;
 
         default:
             std::cout << "Unknown command. Try again.\n";
             continue;
         }
 
+        if (flagSave)
+        {
+            std::ofstream file("lvl1.txt");
+            for (int i = 0; i < 30; ++i)
+            {
+                for (int j = 0; j < 56; ++j)
+                {
+                    file << arrMap[i][j];
+                }
+                file << std::endl;
+            }
+            file.close();
+            break;
+        }
+
         // Проверяем, можно ли сделать ход и хочет ли игрок ходить
         if (movePlayer(arrMap, playerX, playerY, newX, newY, keys, flagMove, bomb))
         {
-            return 1;
+            flagWin = true;
+            break;
         }
 
         i > 10 ? moveEnemies(arrMap, playerX, playerY, enemyPositions) : 1;
@@ -196,5 +217,9 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
     }
     delete[] enemyPositions;
 
-    return -1;
+    if (flagWin)
+        return 2;
+    if (flagSave)
+        return 1;
+    return 0;
 }

@@ -3,6 +3,6 @@
 #define CHESTS2_H
 
 void chest21(int& keys, int& keysInChest21);
-void chest22(int& magicItem2, int& magicItemInChest22);
+void chest22(int& bomb);
 
 #endif // CHESTS2_H

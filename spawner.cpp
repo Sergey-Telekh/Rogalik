@@ -18,14 +18,14 @@ void spavner(char** arrMap, int& enemyCount)
 					for (int l = -3; l < 4; ++l)
 					{
 						int temp = rand() % 75;
-						if (temp == 1 && i + l < 30 && i + l > 0)
+						if (temp == 54 && i + l < 30 && i + l > 0)
 						{
 							if (arrMap[i + l][j] == ' ')
 							{
 								arrMap[i + l][j] = 'D';
 							}
 						}
-						if (temp == 2 && j + l < 56 && j + l > 0)
+						if (temp == 61 && j + l < 56 && j + l > 0)
 						{
 							if (arrMap[i][j + l] == ' ')
 							{

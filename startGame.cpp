@@ -33,15 +33,15 @@ char** startGame(std::string fileName, int& playerX, int& playerY)
                 else
                     arrMap[row - 1][j] = ' ';
 
-                if (line[j] == '@') // Координаты игрока - исправлено!
+                if (line[j] == '@') // Координаты игрока
                 {
                     playerX = row - 1;
                     playerY = j;
                 }
-                if (line[j] == '!')
+                if (line[j] == '!') // Координаты игрока
                 {
-                    std::cout << row - 1 << " ";
-                    std::cout << j << std::endl;
+                    std::cout << row - 1 << "  ";
+                    std::cout << j << "\n";
                 }
             }
         }

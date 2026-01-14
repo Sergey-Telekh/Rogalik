@@ -6,31 +6,33 @@ void printRules() // Вывести правила
     std::cout << std::endl;
     std::cout << std::endl;
 
-    std::cout << "=== GAME RULES ===\n\n";
-    std::cout << "SYMBOLS:\n";
-    std::cout << "  #  = Wall (cannot pass)\n";
-    std::cout << "  @  = Player (you)\n";
-    std::cout << "  l- = Door (requires key)\n";
-    std::cout << "  ?  = Chest (contains loot)\n";
-    std::cout << "  !  = Person (can talk to)\n";
-    std::cout << " '''" << std::endl;
-    std::cout << " ''' = Spawner (enemies spawn nearby)\n";
-    std::cout << "  D  = Enemy (danger!)\n\n";
+    std::cout << "=== ПРАВИЛА ИГРЫ ===\n\n";
+    std::cout << "СИМВОЛЫ НА КАРТЕ:\n";
+    std::cout << "  #  = Стена (нельзя пройти)\n";
+    std::cout << "  @  = Игрок (вы)\n";
+    std::cout << "  l- = Дверь (требуется ключ)\n";
+    std::cout << "  ?  = Сундук (содержит предметы)\n";
+    std::cout << "  !  = Персонаж (можно поговорить)\n";
+    std::cout << "  ' = Гнездо (враги появляются рядом)\n";
+    std::cout << "  D  = Враг (опасность!)\n\n";
 
-    std::cout << "CONTROLS:\n";
-    std::cout << "  Movement: W, A, S, D\n";
-    std::cout << "  Inventory: E (check what you have)\n";
-    std::cout << "  Talk: T (when near a person)\n";
-    std::cout << "  Chests: R (open chest when near)\n";
-    std::cout << "    Chest Loot: Y (take all and close)\n";
-    std::cout << "    Close Chest: U (close without taking)\n";
-    std::cout << "  Attack: Q, then choose weapon:\n";
-    std::cout << "    Sword (S): Enter two directions (WW, WD, DD, etc.)\n";
-    std::cout << "    Bow (B): Enter one direction (W, A, S, D)\n";
+    std::cout << "УПРАВЛЕНИЕ:\n";
+    std::cout << "  Движение: W, A, S, D\n";
+    std::cout << "  Инвентарь: I (посмотреть предметы)\n";
+    std::cout << "  Диалог: T (рядом с персонажем)\n";
+    std::cout << "  Сундук: C (открыть рядом с сундуком)\n";
+    std::cout << "    Взять добычу: T (взять все и закрыть)\n";
+    std::cout << "    Закрыть сундук: !T (закрыть без взятия)\n";
+    std::cout << "  Атака: Q, затем выбор оружия:\n";
+    std::cout << "    Меч (S): ввести два направления (WW, WD, DD и т.д.)\n";
+    std::cout << "    Лук (B): ввести одно направление (W, A, S, D)\n";
+    std::cout << "  Сохранение: M (сохранить игру)\n";
+    std::cout << "  Выход: X (выйти без сохранения)\n";
+    std::cout << "  Правила: Z (показать это меню)\n";
 
-    std::cout << "\nDANGERS:\n";
-    std::cout << "  Enemies (D) will chase you!\n";
-    std::cout << "  If an enemy catches you, you will die and lose the game!\n\n\n";
+    std::cout << "\nОПАСНОСТИ:\n";
+    std::cout << "  Враги (D) будут преследовать вас!\n";
+    std::cout << "  Если враг догонит вас, вы погибнете и проиграете!\n\n\n";
 }
 
 void print(char** arrMap) // Вывести карту
@@ -50,7 +52,7 @@ void inventory(int& sword, int& bow, int& armor, int& keys) // Вывести инвентарь
     std::cout << "You have: \n";
     std::cout << (sword == 1 ? "sword\n" : "");
     std::cout << (bow == 1 ? "bow\n" : "");
-    std::cout << (armor == 1 ? "armor\n" : "");
+    std::cout << (armor >= 1 ? "armor\n" : "");
     if(keys != 0)
         std::cout << keys << " keys\n";
     if (sword == 0 && bow == 0 && armor == 0 && keys == 0)

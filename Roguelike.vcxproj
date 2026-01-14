@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="chest2.cpp" />
     <ClCompile Include="level2.cpp" />
+    <ClCompile Include="NPC2.cpp" />
     <ClCompile Include="Roguelike.cpp" />
     <ClCompile Include="gameFunctions.cpp" />
     <ClCompile Include="level1.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="gameFunctions.h" />
     <ClInclude Include="level2.h" />
     <ClInclude Include="NPC1.h" />
+    <ClInclude Include="NPC2.h" />
     <ClInclude Include="spavner.h" />
     <ClInclude Include="startGame.h" />
     <ClInclude Include="level1.h" />

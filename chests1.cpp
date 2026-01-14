@@ -10,7 +10,7 @@ void chest1(int& sword, int& keys, int& swordInChest1, int& keysInChest1)
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
         if (swordInChest1 == 1 && keysInChest1 == 1)
         {
@@ -39,7 +39,7 @@ void chest2(int& magicItem, int& keys, int& magicItemInChest2, int& keysInChest2
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
         if (magicItemInChest2 == 1 && keysInChest2 == 2)
         {
@@ -68,11 +68,11 @@ void chest3(int& armor, int& armorInChest3)
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
         if (armorInChest3 == 1)
         {
-            armor = 1;
+            armor += 1;
             armorInChest3 = 0;
             std::cout << "You tack an armor.\n";
         }
@@ -95,11 +95,11 @@ void chest4(int& armor, int& keys, int& armorInChest4, int& keysInChest4)
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
         if (armorInChest4 == 1 && keysInChest4 == 4)
         {
-            armor = 1;
+            armor += 1;
             keys += 4;
             armorInChest4 = 0;
             keysInChest4 = 0;
@@ -130,7 +130,7 @@ void chestsInLvl1(int& playerX, int& playerY, int& sword, int& keys, int& swordI
     {
         chest3(armor, armorInChest3);
     }
-    else if ((playerX == 28 && playerY == 17) || (playerX == 27 && playerY == 18))
+    else if ((playerX == 28 && playerY == 15) || (playerX == 27 && playerY == 16))
     {
         chest4(armor, keys, armorInChest4, keysInChest4);
     }

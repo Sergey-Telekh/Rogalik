@@ -8,7 +8,7 @@ void chest21(int& keys, int& keysInChest21)
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
         if (keysInChest21 == 6)
         {
@@ -27,25 +27,24 @@ void chest21(int& keys, int& keysInChest21)
     }
 }
 
-void chest22(int& magicItem2, int& magicItemInChest22)
+void chest22(int& bomb)
 {
     std::cout << "In the chest:\n";
-    std::cout << (magicItemInChest22 == 1 ? "a Magic item.\n" : "Nothing.\n");
+    std::cout << "Куча бомб.";
 
     char toDo = ' ';
-    std::cout << "What do you want to do? ('Y' to tack all)" << std::endl;
+    std::cout << "What do you want to do? ('Y' to tack)" << std::endl;
     std::cin >> toDo;
-    if (toDo == 'Y' || toDo == 'y')
+    if (toDo == 'T' || toDo == 't')
     {
-        if (magicItemInChest22 == 1)
+        if (bomb == 0)
         {
-            magicItem2 = 1;
-            magicItemInChest22 = 0;
-            std::cout << "You tack a magic item.\n";
+            std::cout << "You tack a bomb.\n";
+            bomb = 1;
         }
         else
         {
-            std::cout << "You tack nothing)\n";
+            std::cout << "You already have a bomb, but unfortunately you don't have anywhere to put the second one(\n";
         }
     }
     else

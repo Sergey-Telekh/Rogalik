@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include "gameFunctions.h"
-#include "level1.h"
 #include "moveEnemies.h"
 #include "chests1.h"
 #include "startGame.h"
@@ -37,13 +36,8 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
     }
 
     // Выводим что на данном этапе есть
-    inventory(sword, bow, armor, keys);
-    printRules();
     print(arrMap);
     std::cout << std::endl;
-
-    // Позиция игрока(Потом убрать)
-    std::cout << "Player position: X=" << playerX << ", Y=" << playerY << std::endl;
 
 
     int i = 0;
@@ -52,7 +46,6 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
     {
         int enemyCount = 0;
         ++i;
-        armor = 1;
 
         clearMap(arrMap);
 
@@ -74,7 +67,7 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
 
         // Получение хода от игрока
         char move = ' ';
-        std::cout << "Enter move (W/A/S/D/E/Q/R/T, or 'X' to exit): ";
+        std::cout << "Enter move (W/A/S/D/I/Q/R/T/S/X, or 'M' to save): ";
         std::cin >> move;
         std::cout << std::endl;
 
@@ -121,8 +114,8 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             flagMove = true;
             break;
 
-        case('E'):
-        case('e'):
+        case('I'):
+        case('i'):
             inventory(sword, bow, armor, keys);
             continue; // Пропускаем перерисовку карты
 
@@ -131,13 +124,13 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             bit(arrMap, playerX, playerY, sword, bow);
             break;
 
-        case('Z'):
-        case('z'):
+        case('R'):
+        case('r'):
             printRules();
             continue;
 
-        case('R'):
-        case('r'):
+        case('C'):
+        case('c'):
             chestsInLvl1(playerX, playerY, sword, keys, swordInChest1, keysInChest1, magicItem, magicItemInChest2, keysInChest2, armor, armorInChest3, keysInChest3, armorInChest4, keysInChest4);
             continue;
 
@@ -146,8 +139,8 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
             persons1(playerX, playerY, qwest11, qwest12, qwest13, qwest14, armor, keys, killCount, magicItem, bomb);
             continue;
 
-        case('K'):
-        case('k'):
+        case('M'):
+        case('m'):
             flagSave = true;
             break;
 
