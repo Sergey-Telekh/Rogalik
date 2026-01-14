@@ -38,11 +38,6 @@ char** startGame(std::string fileName, int& playerX, int& playerY)
                     playerX = row - 1;
                     playerY = j;
                 }
-                if (line[j] == '!') // Координаты игрока
-                {
-                    std::cout << row - 1 << "  ";
-                    std::cout << j << "\n";
-                }
             }
         }
         ++row;
