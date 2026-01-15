@@ -27,10 +27,10 @@ void chest21(int& keys, int& keysInChest21)
     }
 }
 
-void chest22(int& bomb)
+void chest22(int& bomb, int& keys)
 {
     std::cout << "In the chest:\n";
-    std::cout << "Куча бомб.";
+    std::cout << "Куча бомб и рядом немного ключей";
 
     char toDo = ' ';
     std::cout << "What do you want to do? ('Y' to tack)" << std::endl;
@@ -39,12 +39,13 @@ void chest22(int& bomb)
     {
         if (bomb == 0)
         {
-            std::cout << "You tack a bomb.\n";
+            std::cout << "Первым делом ты берёшь бомбу, после чего стараетешься взять как можно больше ключей, но у тебя не получается положить в карман больше 6, теперь у вас 6 ключей.\n";
             bomb = 1;
+            keys = 6;
         }
         else
         {
-            std::cout << "You already have a bomb, but unfortunately you don't have anywhere to put the second one(\n";
+            std::cout << "Ты уже взял из этого сундука всё, что мог, к сожалению тееперь тебе придётся оставить этот сундук в покое.\n";
         }
     }
     else

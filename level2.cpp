@@ -10,7 +10,7 @@
 #include "NPC2.h"
 
 
-int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qwest21, int& qwest22, int& killCount)
+int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, char& qwest21, char& qwest22, int& killCount)
 {
 
     // Создание всех переменных
@@ -36,8 +36,6 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qw
     }
 
     // Выводим что на данном этапе есть
-    inventory(sword, bow, armor, keys);
-    printRules();
     print(arrMap);
     std::cout << std::endl;
 
@@ -51,7 +49,6 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qw
     {
         int enemyCount = 0;
         ++i;
-        armor = 1;
 
         clearMap(arrMap);
 
@@ -138,7 +135,7 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qw
         case('C'):
         case('c'):
             if (playerX == 21 && playerY == 19)
-                chest22(bomb);
+                chest22(bomb, keys);
             else if ((playerX == 27 && playerY == 54) || (playerX == 28 && playerY == 53))
                 chest21(keys, keysInChest21);
             continue;
@@ -163,7 +160,7 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qw
 
         if (flagSave)
         {
-            std::ofstream file("lvl1.txt");
+            std::ofstream file("lvl2.txt");
             for (int i = 0; i < 30; ++i)
             {
                 for (int j = 0; j < 56; ++j)
@@ -199,7 +196,6 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, int& qw
         std::cout << "Your kills: " << killCount << std::endl;
         print(arrMap);
         std::cout << std::endl;
-        std::cout << "Player position: X=" << playerX << ", Y=" << playerY << std::endl;
     }
 
 

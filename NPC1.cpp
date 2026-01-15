@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cctype>
 
-void person11(int& qwest11, int& armor, int& killCount)
+void person11(char& qwest11, int& armor, int& killCount)
 {
     if (qwest11 == '0')
     {
@@ -55,7 +55,7 @@ void person11(int& qwest11, int& armor, int& killCount)
     }
 }
 
-void person12(int& qwest22, int& keys)
+void person12(char& qwest22, int& keys)
 {
     if (qwest22 == '0')
     {
@@ -99,7 +99,7 @@ void person12(int& qwest22, int& keys)
     }
 }
 
-void person13(int& qwest33, int& magicItem)
+void person13(char& qwest33, int& magicItem)
 {
     if (qwest33 == '0')
     {
@@ -144,7 +144,7 @@ void person14(int& bomb)
     }
 }
 
-void persons1(int& playerX, int& playerY, int& qwest11, int& qwest12, int& qwest13, int& qwest14, int& armor, int& keys, int& killCount, int& magicItem, int& bomb)
+void persons1(int& playerX, int& playerY, char& qwest11, char& qwest12, char& qwest13, char& qwest14, int& armor, int& keys, int& killCount, int& magicItem, int& bomb)
 {
     if ((playerX == 1 && playerY == 22) || (playerX == 2 && playerY == 21))
     {

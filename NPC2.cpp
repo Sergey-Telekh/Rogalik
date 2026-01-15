@@ -1,6 +1,6 @@
 #include <iostream>
 
-void person21(int& qwest21, int& killCount, int& secretIngredient, int& keys, int& killCountQwest)
+void person21(char& qwest21, int& killCount, int& secretIngredient, int& keys, int& killCountQwest)
 {
     if (qwest21 == '0')
     {
@@ -35,7 +35,7 @@ void person21(int& qwest21, int& killCount, int& secretIngredient, int& keys, in
     }
 }
 
-void person22(int& qwest22, int& hasIngredient, int& bow)
+void person22(char& qwest22, int& hasIngredient, int& bow)
 {
     if (qwest22 == '0')
     {

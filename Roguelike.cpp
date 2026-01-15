@@ -4,15 +4,16 @@
 #include <string>
 #include "gameFunctions.h" 
 #include "level1.h" 
-#include "level2.h" 
+#include "level3.h"
+#include "level2.h"
 #include "moveEnemies.h"
 #include <stdlib.h>
 
-void save(std::string& level, int& sword, int& bow, int& armor, int& keys, int& magicItem1, int& magicItem2, int& qwest1, int& qwest2, int& qwest3, int& qwest4, int& kills)
+void save(std::string& level, int& sword, int& bow, int& armor, int& keys, int& magicItem1, int& magicItem2, char& qwest1, char& qwest2, char& qwest3, char& qwest4, int& kills)
 {
     std::ofstream file("level.txt");
     file << level << std::endl;
-    file << sword << bow << armor << (keys >= 9 ? keys : 9) << magicItem1 << magicItem2 << std::endl;
+    file << sword << bow << armor << (keys >= 9 ? 9 : keys) << magicItem1 << magicItem2 << std::endl;
     file << qwest1 << qwest2 << qwest3 << qwest4 << std::endl;
     file << kills;
     file.close();
@@ -45,10 +46,10 @@ int main() // Основная функция
 
 
     getline(file, line);
-    int qwest1 = line[0];
-    int qwest2 = line[1];
-    int qwest3 = line[2];
-    int qwest4 = line[3];
+    char qwest1 = line[0];
+    char qwest2 = line[1];
+    char qwest3 = line[2];
+    char qwest4 = line[3];
 
 
     getline(file, line);
@@ -108,6 +109,8 @@ int main() // Основная функция
             std::string pass;
             std::cin >> pass;
             std::cout << "Для начала игры подойдите к человеку слева от вас и нажмите Т, для вывода правил нажмите R\n\n";
+            std::cout << "Введите что-нибудь для продолжения: ";
+            std::cin >> pass;
         }
         int tmp = level1(sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
         if (tmp == 1)
@@ -117,15 +120,25 @@ int main() // Основная функция
         if (tmp == 2)
         {
             std::string a = "2";
-            int b = 0;
+            char b = '0';
             save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
         }
     }
     else if (strLevel == "2") 
     {
-        level2(sword, bow, armor, keys, magicItem2, qwest1, qwest2, kills);
+        int tmp = level2(sword, bow, armor, keys, magicItem2, qwest1, qwest2, kills);
+        if (tmp == 1)
+        {
+            save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+        }
+        if (tmp == 2)
+        {
+            std::string a = "3";
+            char b = '0';
+            save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
+        }
     }
-    // else if (strLevel == "2") level3;
+     else if (strLevel == "3") level3(sword, bow, armor, keys, qwest1, kills);
     // else if (strLevel == "2") level4;
     // else if (strLevel == "2") level5;
     // else if (strLevel == "2") level6;
