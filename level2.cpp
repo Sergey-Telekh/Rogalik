@@ -21,6 +21,8 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, char& q
     bool flagSave = false;
     int temp = { 0 }; // Счётчик килов
     int keysInChest21 = 6; // Заполнение сундуков
+    bool tempp = false; // Проверка на правильность удара
+
     int bomb = 0;
     int killCountQwest = 0;
 
@@ -124,8 +126,11 @@ int level2(int& sword, int& bow, int& armor, int& keys, int& magicItem2, char& q
 
         case('Q'):
         case('q'):
-            bit(arrMap, playerX, playerY, sword, bow);
-            break;
+            tempp = bit(arrMap, playerX, playerY, sword, bow);
+            if (tempp)
+                break;
+            else
+                continue;
 
         case('R'):
         case('r'):

@@ -155,7 +155,7 @@ int moveEnemies(char** arrMap, int playerX, int playerY, int** enemyPositions)
 }
 
 // Функция удара
-void bit(char** arrMap, int playerX, int playerY, int sword, int bow) // Удары
+bool bit(char** arrMap, int playerX, int playerY, int sword, int bow) // Удары
 {
     std::string bit = "";
     std::cout << "What do you want to hit?\n";
@@ -205,11 +205,13 @@ void bit(char** arrMap, int playerX, int playerY, int sword, int bow) // Удары
             else
             {
                 std::cout << "You can't strike in that direction!\n";
+                return false;
             }
         }
         else
         {
             std::cout << "You don't have a sword\n";
+            return false;
         }
     }
     else if (bit == "b" || bit == "B")
@@ -242,14 +244,22 @@ void bit(char** arrMap, int playerX, int playerY, int sword, int bow) // Удары
                 playerY - 2 > 0 ? arrMap[playerX][playerY - 2] = (arrMap[playerX][playerY - 2] == ' ' || arrMap[playerX][playerY - 2] == 'D' || arrMap[playerX][playerY - 2] == '-' ? '-' : arrMap[playerX][playerY - 2]) : 1;
                 playerY - 3 > 0 ? arrMap[playerX][playerY - 3] = (arrMap[playerX][playerY - 3] == ' ' || arrMap[playerX][playerY - 3] == 'D' || arrMap[playerX][playerY - 3] == '-' ? '-' : arrMap[playerX][playerY - 3]) : 1;
             }
+            else
+            {
+                std::cout << "You can't strike in that direction!\n";
+                return false;
+            }
         }
         else
         {
             std::cout << "You don't have a bow\n";
+            return false;
         }
     }
     else
     {
         std::cout << "Hmmm... I don't think you can do it";
+        return false;
     }
+    return true;
 }

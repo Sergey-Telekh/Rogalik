@@ -4,8 +4,9 @@
 #include <string>
 #include "gameFunctions.h" 
 #include "level1.h" 
-#include "level3.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 #include "moveEnemies.h"
 #include <stdlib.h>
 
@@ -108,9 +109,11 @@ int main() // Основная функция
             std::cout << "Введите что-нибудь для продолжения: ";
             std::string pass;
             std::cin >> pass;
+            std::cout << std::endl;
             std::cout << "Для начала игры подойдите к человеку слева от вас и нажмите Т, для вывода правил нажмите R\n\n";
             std::cout << "Введите что-нибудь для продолжения: ";
             std::cin >> pass;
+            std::cout << std::endl;
         }
         int tmp = level1(sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
         if (tmp == 1)
@@ -137,9 +140,36 @@ int main() // Основная функция
             char b = '0';
             save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
         }
+
     }
-     else if (strLevel == "3") level3(sword, bow, armor, keys, qwest1, kills);
-    // else if (strLevel == "2") level4;
+    else if (strLevel == "3")
+    {
+        int tmp = level3(sword, bow, armor, keys, qwest1, kills);
+        if (tmp == 1)
+        {
+            save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+        }
+        if (tmp == 2)
+        {
+            std::string a = "4";
+            char b = '0';
+            save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
+        }
+    }
+    else if (strLevel == "4")
+    {
+        int tmp = level4(sword, bow, armor, keys, qwest1, kills);
+        if (tmp == 1)
+        {
+            save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+        }
+        if (tmp == 2)
+        {
+            std::string a = "5";
+            char b = '0';
+            save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
+        }
+    }
     // else if (strLevel == "2") level5;
     // else if (strLevel == "2") level6;
     // else if (strLevel == "2") level7;

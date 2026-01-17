@@ -10,7 +10,7 @@
 #include "NPCs.h"
 
 
-int level3(int& sword, int& bow, int& armor, int& keys, char& qwest31, int& killCount)
+int level4(int& sword, int& bow, int& armor, int& keys, char& qwest41, int& killCount) 
 {
 
     // Создание всех переменных
@@ -20,12 +20,13 @@ int level3(int& sword, int& bow, int& armor, int& keys, char& qwest31, int& kill
     bool flagWin = false;
     bool flagSave = false;
     bool tempp = false; // Проверка на правильность удара
+    int armorInChest41 = 1;
 
     int temp = 0;
     int bomb = 0;
     int killCountQwest = 0;
 
-    char** arrMap = startGame("lvl3.txt", playerX, playerY);
+    char** arrMap = startGame("lvl4.txt", playerX, playerY);
 
 
     // Создание массива для врагов (в куче)
@@ -138,14 +139,14 @@ int level3(int& sword, int& bow, int& armor, int& keys, char& qwest31, int& kill
 
         case('C'):
         case('c'):
-            if ((playerX == 21 && playerY == 45) || (playerX == 20 && playerY == 46))
-                chest31(keys);
+            if ((playerX == 6 && playerY == 45) || (playerX == 6 && playerY == 47) || (playerX == 5 && playerY == 46) || (playerX == 7 && playerY == 46))
+                chest41(armor, armorInChest41);
             continue;
 
         case('T'):
         case('t'):
-            if (playerX == 28 && playerY == 27)
-                person31();
+            if (playerX == 19 && playerY == 22)
+                person41(qwest41, killCount, bomb, killCountQwest);
             continue;
 
 
@@ -161,7 +162,7 @@ int level3(int& sword, int& bow, int& armor, int& keys, char& qwest31, int& kill
 
         if (flagSave)
         {
-            std::ofstream file("lvl3.txt");
+            std::ofstream file("lvl4.txt");
             for (int i = 0; i < 30; ++i)
             {
                 for (int j = 0; j < 56; ++j)
@@ -197,7 +198,6 @@ int level3(int& sword, int& bow, int& armor, int& keys, char& qwest31, int& kill
         std::cout << "Your kills: " << killCount << std::endl;
         print(arrMap);
         std::cout << std::endl;
-        std::cout << playerX << "  " << playerY;
     }
 
 

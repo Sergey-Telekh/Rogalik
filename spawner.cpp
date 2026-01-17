@@ -5,7 +5,7 @@
 
 void spavner(char** arrMap, int& enemyCount)
 {
-	if (enemies(arrMap) <= 38)
+	if (enemies(arrMap) <= 60)
 	{
 		srand(time(NULL));
 

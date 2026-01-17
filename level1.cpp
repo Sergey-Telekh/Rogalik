@@ -22,13 +22,14 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
     int temp = { 0 }; // Счётчик килов
     int swordInChest1 = 1, keysInChest1 = 1, magicItemInChest2 = 1, keysInChest2 = 2, keysInChest3 = 1, armorInChest3 = 1, keysInChest4 = 4, armorInChest4 = 1; // Заполнение сундуков
     int bomb = 0;
+    bool tempp = false; // Проверка на правильность удара
     
 
     char** arrMap = startGame("lvl1.txt", playerX, playerY);
 
 
     // Создание массива для врагов (в куче)
-    const int MAX_ENEMIES = 60;
+    const int MAX_ENEMIES = 70;
     int** enemyPositions = new int* [MAX_ENEMIES];
     for (int i = 0; i < MAX_ENEMIES; ++i)
     {
@@ -121,8 +122,11 @@ int level1(int& sword, int& bow, int& armor, int& keys, int& magicItem, int& mag
 
         case('Q'):
         case('q'):
-            bit(arrMap, playerX, playerY, sword, bow);
-            break;
+            tempp = bit(arrMap, playerX, playerY, sword, bow);
+            if (tempp)
+                break;
+            else
+                continue;
 
         case('R'):
         case('r'):

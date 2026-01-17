@@ -127,7 +127,9 @@
     <ClCompile Include="chests.cpp" />
     <ClCompile Include="level2.cpp" />
     <ClCompile Include="level3.cpp" />
+    <ClCompile Include="level4.cpp" />
     <ClCompile Include="NPC2.cpp" />
+    <ClCompile Include="NPCs.cpp" />
     <ClCompile Include="Roguelike.cpp" />
     <ClCompile Include="gameFunctions.cpp" />
     <ClCompile Include="level1.cpp" />
@@ -145,8 +147,10 @@
     <ClInclude Include="gameFunctions.h" />
     <ClInclude Include="level2.h" />
     <ClInclude Include="level3.h" />
+    <ClInclude Include="level4.h" />
     <ClInclude Include="NPC1.h" />
     <ClInclude Include="NPC2.h" />
+    <ClInclude Include="NPCs.h" />
     <ClInclude Include="spavner.h" />
     <ClInclude Include="startGame.h" />
     <ClInclude Include="level1.h" />
