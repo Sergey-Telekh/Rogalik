@@ -42,12 +42,12 @@ int moveEnemies(char** arrMap, int playerX, int playerY, int** enemyPositions)
         {
             if (arrMap[i][j] == 'D')
             {
-                if (enemyCount < 50)
-                {
+               
+                
                     enemyPositions[enemyCount][0] = i; // X координата
                     enemyPositions[enemyCount][1] = j; // Y координата
-                }
-                enemyCount++;
+                    enemyCount++;
+                
             }
         }
     }
@@ -55,7 +55,7 @@ int moveEnemies(char** arrMap, int playerX, int playerY, int** enemyPositions)
     // ƒвигаем каждого врага
     for (int e = 0; e < enemyCount; ++e)
     {
-        if (e > 50) continue; 
+        
 
         int enemyX = enemyPositions[e][0];
         int enemyY = enemyPositions[e][1];

@@ -7,6 +7,9 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
+#include "level5.h"
+#include "level6.h"
+#include "level7.h"
 #include "moveEnemies.h"
 #include <stdlib.h>
 
@@ -170,9 +173,44 @@ int main() // Основная функция
             save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
         }
     }
-    // else if (strLevel == "2") level5;
-    // else if (strLevel == "2") level6;
-    // else if (strLevel == "2") level7;
+    else if (strLevel == "5")
+    {
+        keys++;
+        keys++;
+        int tmp = level5(sword, bow, armor, keys, kills);
+        if (tmp == 1)
+        {
+            save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+        }
+        if (tmp == 2)
+        {
+            std::string a = "6";
+            char b = '0';
+            save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
+        }
+    }
+    else if (strLevel == "6")
+    {
+        int tmp = level6(sword, bow, armor, keys, qwest1, qwest2, kills);
+        if (tmp == 1)
+        {
+            save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+        }
+        if (tmp == 2)
+        {
+            std::string a = "7";
+            char b = '0';
+            save(a, sword, bow, armor, keys, magicItem1, magicItem2, b, b, b, b, kills);
+        }
+    }
+     else if (strLevel == "7") 
+     {
+         int tmp = level7(sword, bow, armor, keys, kills);
+         if (tmp == 1)
+         {
+             save(strLevel, sword, bow, armor, keys, magicItem1, magicItem2, qwest1, qwest2, qwest3, qwest4, kills);
+         }
+     }
 
     
     

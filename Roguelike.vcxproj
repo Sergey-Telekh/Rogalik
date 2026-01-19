@@ -128,6 +128,9 @@
     <ClCompile Include="level2.cpp" />
     <ClCompile Include="level3.cpp" />
     <ClCompile Include="level4.cpp" />
+    <ClCompile Include="level5.cpp" />
+    <ClCompile Include="level6.cpp" />
+    <ClCompile Include="level7.cpp" />
     <ClCompile Include="NPC2.cpp" />
     <ClCompile Include="NPCs.cpp" />
     <ClCompile Include="Roguelike.cpp" />
@@ -148,6 +151,9 @@
     <ClInclude Include="level2.h" />
     <ClInclude Include="level3.h" />
     <ClInclude Include="level4.h" />
+    <ClInclude Include="level5.h" />
+    <ClInclude Include="level6.h" />
+    <ClInclude Include="level7.h" />
     <ClInclude Include="NPC1.h" />
     <ClInclude Include="NPC2.h" />
     <ClInclude Include="NPCs.h" />

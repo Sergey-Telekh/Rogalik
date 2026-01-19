@@ -19,7 +19,7 @@ void spavner(char** arrMap, int& enemyCount)
 					bool spawnY = false;
 					for (int l = -3; l < 4; ++l)
 					{
-						int temp = rand() % 40;
+						int temp = rand() % 80;
 						if (temp == 54 && i + l < 30 && i + l > 0 && !spawnX)
 						{
 							if (arrMap[i + l][j] == ' ')
